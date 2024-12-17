@@ -1,9 +1,9 @@
 # Giraffe Rush: Juego de Aventura
 
 ## Descripción
-**Giraffe Rush** es un emocionante juego desarrollado en JavaScript que combina estrategia, suspenso y diversión. En este juego, el jugador controla a una jirafa que debe esquivar a un león mientras acumula multiplicadores de apuesta. La clave es decidir cuándo retirarse para maximizar las ganancias antes de ser atrapado.
+**Giraffe Rush** es un emocionante juego desarrollado en JavaScript y gestionado en el backend con **Spring Boot**. Combina estrategia, suspenso y diversión. En este juego, el jugador controla a una jirafa que debe esquivar a un león mientras acumula multiplicadores de apuesta. La clave es decidir cuándo retirarse para maximizar las ganancias antes de ser atrapado.
 
-El proyecto incorpora técnicas avanzadas como **Web Workers** para optimizar el rendimiento de carga de imágenes, asegurando una experiencia de usuario fluida y rápida.
+El proyecto incorpora técnicas avanzadas como **Web Workers** para optimizar el rendimiento de carga de imágenes, gestión de datos mediante **Spring Boot**, y operaciones asíncronas realizadas con **AJAX** y **jQuery**.
 
 ---
 
@@ -18,11 +18,12 @@ El proyecto incorpora técnicas avanzadas como **Web Workers** para optimizar el
 - **Optimización con Web Workers:**
   - Las imágenes del juego se cargan en paralelo para minimizar el tiempo de carga inicial.
 
-- **Traducción Multilingüe:**
-  - Implementación de i18next para mostrar mensajes dinámicos en diferentes idiomas.
+- **Gestión Backend con Spring Boot:**
+  - Datos de usuarios, históricos de tiradas y reglas gestionados mediante servicios RESTful.
 
-- **Modularidad y Escalabilidad:**
-  - Código estructurado para facilitar futuras expansiones.
+- **Conexión Base de Datos:**
+  - Utilización de **Maven** como gestor de dependencias.
+  - Base de datos conectada al proyecto para almacenar usuarios y tiradas.
 
 ---
 
@@ -36,9 +37,19 @@ El proyecto incorpora técnicas avanzadas como **Web Workers** para optimizar el
   - Animaciones y lógica del juego.
 
 - **jQuery:**
-  - Manipulación eficiente del DOM.
+  - Manipulación eficiente del DOM y operaciones AJAX.
 
-### Backend y Herramientas
+### Backend
+- **Spring Boot:**
+  - Gestión de servicios RESTful.
+
+- **Java:**
+  - Gestión de lógica del backend y conexión con la base de datos.
+
+- **Maven:**
+  - Gestor de dependencias del proyecto.
+
+### Herramientas
 - **GitHub:**
   - Control de versiones y colaboración.
 
@@ -55,14 +66,24 @@ El proyecto incorpora técnicas avanzadas como **Web Workers** para optimizar el
 1. Clona el repositorio desde GitHub:
 
 ```bash
-https://github.com/tuusuario/giraffe-rush.git
+git clone [https://github.com/DiegoArroyo04/CrashGame.git]
 ```
 
-2. Abre el proyecto en tu editor de código preferido (por ejemplo, Visual Studio).
+2. Configura la base de datos en el archivo `application.properties` de Spring Boot.
 
-3. Configura un servidor local (puedes usar extensiones como Live Server).
+3. Construye el proyecto con Maven:
 
-4. Accede al juego desde tu navegador web.
+```bash
+mvn clean install
+```
+
+4. Ejecuta el servidor backend.
+
+5. Abre el proyecto en tu editor de código preferido (por ejemplo, Visual Studio) para gestionar el frontend.
+
+6. Configura un servidor local (puedes usar extensiones como Live Server).
+
+7. Accede al juego desde tu navegador web.
 
 ---
 
@@ -74,83 +95,7 @@ https://github.com/tuusuario/giraffe-rush.git
 
 ---
 
-## Optimizaciones de Rendimiento
-- **Carga de Imágenes con Web Workers:**
-  Las imágenes del juego se cargan de manera simultánea utilizando un Web Worker, lo que reduce los tiempos de espera.
-
-- **Probabilidad Progresiva:**
-  - A medida que el multiplicador crece, la probabilidad de perder aumenta. Esto se implementó para mantener el equilibrio entre riesgo y recompensa.
-
----
-
-## Código Clave: Web Worker
-El siguiente código muestra cómo se utilizan los Web Workers para cargar las imágenes:
-
-### `imageLoaderWorker.js`
-```javascript
-self.onmessage = async function (e) {
-    const imageUrls = e.data;
-    try {
-        const loadedImages = await Promise.all(
-            imageUrls.map(async (url) => {
-                const response = await fetch(url);
-                const blob = await response.blob();
-                return URL.createObjectURL(blob);
-            })
-        );
-        self.postMessage({ success: true, images: loadedImages });
-    } catch (error) {
-        self.postMessage({ success: false, error: error.message });
-    }
-};
-```
-
----
-
-## Ejemplo de Lógica Progresiva en el Juego
-El siguiente fragmento ilustra cómo la probabilidad de perder aumenta a medida que el multiplicador crece:
-
-```javascript
-const probabilidadFin = Math.random();
-const limiteMultiplicador = multiplicadorJirafa / 10; // Incremento progresivo
-
-if (probabilidadFin < limiteMultiplicador) {
-    // Fin del juego
-}
-```
-
----
-
-## Contribuciones
-Si deseas contribuir a este proyecto, por favor sigue estos pasos:
-1. Haz un fork del repositorio.
-2. Crea una rama para tu característica:
-
-```bash
-git checkout -b nueva-caracteristica
-```
-
-3. Realiza tus cambios y haz commit:
-
-```bash
-git commit -m "Agregué una nueva característica"
-```
-
-4. Haz un push a la rama:
-
-```bash
-git push origin nueva-caracteristica
-```
-
-5. Abre un Pull Request en GitHub.
-
----
-
-## Licencia
-Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para obtener más información.
-
----
 
 ## Contacto
-- **Desarrollador:** [Tu Nombre](https://github.com/tuusuario)
-- **Correo Electrónico:** tunombre@example.com
+- **Desarrollador:** [Diego Arroyo González](https://github.com/DiegoArroyo04)
+- **Correo Electrónico:** diegoarroyogonzalez04@gmail.com
